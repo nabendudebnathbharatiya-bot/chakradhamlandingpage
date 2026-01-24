@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Chakradham Online</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* 🌌 Galaxy Canvas */
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* rotating glow layer */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(255,180,80,0.15),
+        transparent 30%
+      );
+      animation: rotateGlow 18s linear infinite;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    /* 🟡 Logo */
+    .logo {
+      width: 110px;
+      max-width: 40vw;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 0 20px rgba(255,200,100,0.6));
+      animation: fadeDown 1.6s ease forwards;
+    }
+
+    .title-en {
+      font-size: 32px;
+      letter-spacing: 3px;
+      font-weight: 700;
+      animation: slideFade 1.6s ease forwards;
+    }
+
+    .title-bn {
+      font-size: 20px;
+      margin-top: 10px;
+      opacity: 0;
+      animation: slideFade 1.6s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    .title-hi {
+      font-size: 20px;
+      margin-top: 6px;
+      opacity: 0;
+      animation: slideFade 1.6s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .title-en,
+    .title-bn,
+    .title-hi {
+      text-shadow: 0 0 22px rgba(255,180,80,0.7);
+    }
+
+    .bottom {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .enter-btn {
+      width: 85%;
+      max-width: 300px;
+      padding: 14px 0;
+      font-size: 17px;
+      font-weight: 700;
+      color: #000;
+      border: none;
+      border-radius: 28px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffb347, #ffcc33);
+      animation: breathe 2.2s ease-in-out infinite;
+    }
+
+    .enter-btn:active {
+      transform: scale(0.94);
+    }
+
+    @keyframes slideFade {
+      from {
+        opacity: 0;
+        transform: translateY(-25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes breathe {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255,200,80,0.6);
+      }
+      50% {
+        box-shadow: 0 0 26px 6px rgba(255,200,80,0.35);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255,200,80,0.6);
+      }
+    }
+
+    @keyframes rotateGlow {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🌌 Galaxy Canvas -->
+  <canvas id="stars"></canvas>
+
+  <div class="content">
+    <img class="logo"
+      src="https://gapuudgixbxttcgpbgba.supabase.co/storage/v1/object/public/app-8sccs6mlpkap_files/bd13833c-2d5c-41d4-becb-c20a0ee3d6dc/1769272154237_Gemini_Generated_Image_2fgfkm2fgfkm2fgf__1_.jpg"
+      alt="Logo">
+
+    <div class="title-en">CHAKRADHAM ONLINE</div>
+    <div class="title-bn">চক্রধাম অনলাইন</div>
+    <div class="title-hi">चक्रधाम ऑनलाईंन</div>
+  </div>
+
+  <div class="bottom">
+    <button class="enter-btn" onclick="enterSite()">ENTER</button>
+  </div>
+
+  <script>
+    /* 🌠 Star Galaxy Animation */
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const stars = Array.from({ length: 180 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      s: Math.random() * 0.4 + 0.1
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "white";
+
+      for (const star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        star.y += star.s;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    function enterSite() {
+      window.location.href =
+        "https://app-8g2mat3fiwht.appmedo.com";
+    }
+  </script>
+
+</body>
+</html>
